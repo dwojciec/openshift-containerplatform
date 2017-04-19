@@ -46,7 +46,7 @@
 				"Standard_G1", "Standard_G2", "Standard_G3", "Standard_G4", "Standard_G5",
 				"Standard_DS2", "Standard_DS3", "Standard_DS4",
 				"Standard_DS11", "Standard_DS12", "Standard_DS13", "Standard_DS14",
-				"Standard_DS2_v2", "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2",
+				"Standard_DS2_v2","Standard_DS1_v2", "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2",
 				"Standard_DS11_v2", "Standard_DS12_v2", "Standard_DS13_v2", "Standard_DS14_v2",
 				"Standard_GS1", "Standard_GS2", "Standard_GS3", "Standard_GS4", "Standard_GS5"
 			],
@@ -66,7 +66,7 @@
 				"Standard_G1", "Standard_G2", "Standard_G3", "Standard_G4", "Standard_G5",
 				"Standard_DS2", "Standard_DS3", "Standard_DS4",
 				"Standard_DS11", "Standard_DS12", "Standard_DS13", "Standard_DS14",
-				"Standard_DS2_v2", "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2",
+				"Standard_DS2_v2", "Standard_DS1_v2",  "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2",
 				"Standard_DS11_v2", "Standard_DS12_v2", "Standard_DS13_v2", "Standard_DS14_v2",
 				"Standard_GS1", "Standard_GS2", "Standard_GS3", "Standard_GS4", "Standard_GS5"
 			],
@@ -86,7 +86,7 @@
 				"Standard_G1", "Standard_G2", "Standard_G3", "Standard_G4", "Standard_G5",
 				"Standard_DS2", "Standard_DS3", "Standard_DS4",
 				"Standard_DS11", "Standard_DS12", "Standard_DS13", "Standard_DS14",
-				"Standard_DS2_v2", "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2",
+				"Standard_DS2_v2", "Standard_DS1_v2", "Standard_DS3_v2", "Standard_DS4_v2", "Standard_DS5_v2",
 				"Standard_DS11_v2", "Standard_DS12_v2", "Standard_DS13_v2", "Standard_DS14_v2",
 				"Standard_GS1", "Standard_GS2", "Standard_GS3", "Standard_GS4", "Standard_GS5"
 			],
@@ -298,8 +298,8 @@
 		"newStorageAccountNodeOs": "[concat('nodeos', uniqueString(concat(resourceGroup().id, 'nodeossa')))]",
 		"newStorageAccountNodeData": "[concat('nodedata', uniqueString(concat(resourceGroup().id, 'nodedatasa')))]",
 		"newStorageAccountRegistry": "[concat('registry', uniqueString(concat(resourceGroup().id, 'registry')))]",
-		"newStorageAccountPersistentVolume1": "[concat('pv1sa', uniqueString(concat(resourceGroup().id, 'persistentvolume1')))]", 
-		"newStorageAccountPersistentVolume2": "[concat('pv2sa', uniqueString(concat(resourceGroup().id, 'persistentvolume2')))]", 
+		"newStorageAccountPersistentVolume1": "[concat('pv1sa', uniqueString(concat(resourceGroup().id, 'persistentvolume1')))]",
+		"newStorageAccountPersistentVolume2": "[concat('pv2sa', uniqueString(concat(resourceGroup().id, 'persistentvolume2')))]",
 		"addressPrefix": "10.0.0.0/8",
 		"masterSubnetPrefix": "10.1.0.0/16",
 		"nodeSubnetPrefix": "10.2.0.0/16",
@@ -309,7 +309,7 @@
 		"bastionPublicIp": "bastionpublicip",
 		"persistentVolume1Type": "Standard_LRS",
 		"persistentVolume2Type": "Standard_LRS",
-		
+
 		"masterLoadBalancerName": "[concat(variables('openshiftMasterHostname'), 'lb')]",
 		"masterPublicIpAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('openshiftMasterPublicIpDnsLabel'))]",
 		"masterLbId": "[resourceId('Microsoft.Network/loadBalancers', variables('masterLoadBalancerName'))]",
@@ -318,7 +318,7 @@
 		"masterLbHttpProbeId": "[concat(variables('masterLbId'),'/probes/httpProbe')]",
 		"masterLb8443ProbeId": "[concat(variables('masterLbId'),'/probes/8443Probe')]",
 		"masterLbCockpitProbeId": "[concat(variables('masterLbId'),'/probes/cockpitProbe')]",
-		
+
 		"infraLoadBalancerName": "[concat(variables('openshiftInfraHostname'), 'lb')]",
 		"infraPublicIpAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('infraLbPublicIpDnsLabel'))]",
 		"infraLbId": "[resourceId('Microsoft.Network/loadBalancers', variables('infraLoadBalancerName'))]",
@@ -951,7 +951,7 @@
 					}
 				}]
 			}
-		},	
+		},
 		{
 			"apiVersion": "[variables('apiVersionNetwork')]",
 			"type": "Microsoft.Network/loadBalancers/inboundNatRules",
@@ -973,7 +973,7 @@
 				"backendPort": 22,
 				"enableFloatingIP": false
 			}
-		},		
+		},
 		{
 			"type": "Microsoft.Network/loadBalancers",
 			"name": "[variables('infraLoadBalancerName')]",

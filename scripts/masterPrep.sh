@@ -47,7 +47,8 @@ subscription-manager repos --disable="*"
 subscription-manager repos \
     --enable="rhel-7-server-rpms" \
     --enable="rhel-7-server-extras-rpms" \
-    --enable="rhel-7-server-ose-3.4-rpms"
+    --enable="rhel-7-server-ose-3.5-rpms" \
+    --enable="rhel-7-fast-datapath-rpms"
 
 # Install and enable Cockpit
 echo $(date) " - Installing and enabling Cockpit"
@@ -62,6 +63,8 @@ echo $(date) " - Install base packages and update system to latest packages"
 
 yum -y install wget git net-tools bind-utils iptables-services bridge-utils bash-completion httpd-tools
 yum -y update --exclude=WALinuxAgent
+yum -y install atomic-openshift-excluder atomic-openshift-docker-excluder
+atomic-openshift-excluder unexclude
 
 # Install OpenShift utilities
 echo $(date) " - Installing OpenShift utilities"
@@ -115,14 +118,14 @@ then
       echo "$(date) Failed to mount filesystem which is to host the NFS share."
       exit 6
    fi
-   
+
    for item in registry metrics jenkins
-   do 
+   do
       mkdir -p /exports/$item
    done
-   
+
    chown nfsnobody:nfsnobody /exports -R
-   chmod a+rwx /exports -R  
+   chmod a+rwx /exports -R
 fi
 
 mkdir /etc/azure
